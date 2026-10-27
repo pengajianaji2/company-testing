@@ -1,0 +1,1262 @@
+{
+  "info": {
+    "name": "Contoh Items API",
+    "description": "Contoh collection hasil skill generate-postman-collection. Jalankan hanya di lingkungan dev/test.",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+  },
+  "auth": {
+    "type": "bearer",
+    "bearer": [
+      {
+        "key": "token",
+        "value": "{{token}}",
+        "type": "string"
+      }
+    ]
+  },
+  "variable": [
+    {
+      "key": "token",
+      "value": ""
+    },
+    {
+      "key": "userEmail",
+      "value": ""
+    },
+    {
+      "key": "userId",
+      "value": ""
+    },
+    {
+      "key": "itemId",
+      "value": ""
+    }
+  ],
+  "item": [
+    {
+      "name": "1. Happy Path",
+      "item": [
+        {
+          "name": "1.1 Auth",
+          "item": [
+            {
+              "name": "Auth - register",
+              "request": {
+                "method": "POST",
+                "header": [
+                  {
+                    "key": "Content-Type",
+                    "value": "application/json"
+                  }
+                ],
+                "url": {
+                  "raw": "{{baseUrl}}/api/auth/register",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "api",
+                    "auth",
+                    "register"
+                  ]
+                },
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"email\": \"{{userEmail}}\",\n  \"password\": \"{{userPassword}}\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                },
+                "description": "Contoh: server Express fiktif, src/routes/*.js | US-1 / AC-1",
+                "auth": {
+                  "type": "noauth"
+                }
+              },
+              "event": [
+                {
+                  "listen": "prerequest",
+                  "script": {
+                    "type": "text/javascript",
+                    "exec": [
+                      "pm.collectionVariables.set('userEmail', 'qa_' + Date.now() + '@example.com');"
+                    ]
+                  }
+                },
+                {
+                  "listen": "test",
+                  "script": {
+                    "type": "text/javascript",
+                    "exec": [
+                      "pm.test('Status 201 Created', function () { pm.response.to.have.status(201); });",
+                      "const json = pm.response.json();",
+                      "pm.test('Respons memuat id', function () { pm.expect(json).to.have.property('id'); });",
+                      "pm.collectionVariables.set('userId', json.id);"
+                    ]
+                  }
+                }
+              ]
+            },
+            {
+              "name": "Auth - login",
+              "request": {
+                "method": "POST",
+                "header": [
+                  {
+                    "key": "Content-Type",
+                    "value": "application/json"
+                  }
+                ],
+                "url": {
+                  "raw": "{{baseUrl}}/api/auth/login",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "api",
+                    "auth",
+                    "login"
+                  ]
+                },
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"email\": \"{{userEmail}}\",\n  \"password\": \"{{userPassword}}\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                },
+                "description": "Contoh: server Express fiktif, src/routes/*.js | US-1 / AC-2",
+                "auth": {
+                  "type": "noauth"
+                }
+              },
+              "event": [
+                {
+                  "listen": "test",
+                  "script": {
+                    "type": "text/javascript",
+                    "exec": [
+                      "pm.test('Status 200 OK', function () { pm.response.to.have.status(200); });",
+                      "const json = pm.response.json();",
+                      "pm.test('Token diterima', function () { pm.expect(json.token).to.be.a('string').and.not.empty; });",
+                      "pm.collectionVariables.set('token', json.token);"
+                    ]
+                  }
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "name": "1.2 Items",
+          "item": [
+            {
+              "name": "Items - create",
+              "request": {
+                "method": "POST",
+                "header": [
+                  {
+                    "key": "Content-Type",
+                    "value": "application/json"
+                  }
+                ],
+                "url": {
+                  "raw": "{{baseUrl}}/api/items",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "api",
+                    "items"
+                  ]
+                },
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"name\": \"Item {{$timestamp}}\",\n  \"price\": 10\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                },
+                "description": "Contoh: server Express fiktif, src/routes/*.js | US-2 / AC-3"
+              },
+              "event": [
+                {
+                  "listen": "test",
+                  "script": {
+                    "type": "text/javascript",
+                    "exec": [
+                      "pm.test('Status 201 Created', function () { pm.response.to.have.status(201); });",
+                      "const json = pm.response.json();",
+                      "pm.test('Respons memuat id dan name', function () { pm.expect(json).to.include.keys('id', 'name'); });",
+                      "pm.collectionVariables.set('itemId', json.id);"
+                    ]
+                  }
+                }
+              ]
+            },
+            {
+              "name": "Items - list",
+              "request": {
+                "method": "GET",
+                "header": [],
+                "url": {
+                  "raw": "{{baseUrl}}/api/items",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "api",
+                    "items"
+                  ]
+                },
+                "description": "Contoh: server Express fiktif, src/routes/*.js | US-2 / AC-4"
+              },
+              "event": [
+                {
+                  "listen": "test",
+                  "script": {
+                    "type": "text/javascript",
+                    "exec": [
+                      "pm.test('Status 200 OK', function () { pm.response.to.have.status(200); });",
+                      "pm.test('Respons berupa array', function () { pm.expect(pm.response.json()).to.be.an('array'); });"
+                    ]
+                  }
+                }
+              ]
+            },
+            {
+              "name": "Items - get by id",
+              "request": {
+                "method": "GET",
+                "header": [],
+                "url": {
+                  "raw": "{{baseUrl}}/api/items/{{itemId}}",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "api",
+                    "items",
+                    "{{itemId}}"
+                  ]
+                },
+                "description": "Contoh: server Express fiktif, src/routes/*.js | US-2 / AC-5"
+              },
+              "event": [
+                {
+                  "listen": "test",
+                  "script": {
+                    "type": "text/javascript",
+                    "exec": [
+                      "pm.test('Status 200 OK', function () { pm.response.to.have.status(200); });",
+                      "pm.test('Id sama dengan yang dibuat', function () { pm.expect(pm.response.json().id).to.eql(pm.collectionVariables.get('itemId')); });"
+                    ]
+                  }
+                }
+              ]
+            },
+            {
+              "name": "Items - update",
+              "request": {
+                "method": "PUT",
+                "header": [
+                  {
+                    "key": "Content-Type",
+                    "value": "application/json"
+                  }
+                ],
+                "url": {
+                  "raw": "{{baseUrl}}/api/items/{{itemId}}",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "api",
+                    "items",
+                    "{{itemId}}"
+                  ]
+                },
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"name\": \"Item diperbarui\",\n  \"price\": 20\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                },
+                "description": "Contoh: server Express fiktif, src/routes/*.js | US-2 / AC-6"
+              },
+              "event": [
+                {
+                  "listen": "test",
+                  "script": {
+                    "type": "text/javascript",
+                    "exec": [
+                      "pm.test('Status 200 OK', function () { pm.response.to.have.status(200); });",
+                      "pm.test('Nama diperbarui', function () { pm.expect(pm.response.json().name).to.eql('Item diperbarui'); });"
+                    ]
+                  }
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "name": "2. Worst Case",
+      "item": [
+        {
+          "name": "2.1 Auth",
+          "item": [
+            {
+              "name": "[WC] Auth - register body kosong",
+              "request": {
+                "method": "POST",
+                "header": [
+                  {
+                    "key": "Content-Type",
+                    "value": "application/json"
+                  }
+                ],
+                "url": {
+                  "raw": "{{baseUrl}}/api/auth/register",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "api",
+                    "auth",
+                    "register"
+                  ]
+                },
+                "body": {
+                  "mode": "raw",
+                  "raw": "{}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                },
+                "description": "Contoh: server Express fiktif, src/routes/*.js",
+                "auth": {
+                  "type": "noauth"
+                }
+              },
+              "event": [
+                {
+                  "listen": "test",
+                  "script": {
+                    "type": "text/javascript",
+                    "exec": [
+                      "pm.test('Ditolak dengan 400 (body kosong)', function () { pm.response.to.have.status(400); });",
+                      "pm.test('Tidak ada error server (bukan 5xx)', function () { pm.expect(pm.response.code).to.be.below(500); });"
+                    ]
+                  }
+                }
+              ]
+            },
+            {
+              "name": "[WC] Auth - register email tanpa @",
+              "request": {
+                "method": "POST",
+                "header": [
+                  {
+                    "key": "Content-Type",
+                    "value": "application/json"
+                  }
+                ],
+                "url": {
+                  "raw": "{{baseUrl}}/api/auth/register",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "api",
+                    "auth",
+                    "register"
+                  ]
+                },
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"email\": \"bukan-email\",\n  \"password\": \"{{userPassword}}\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                },
+                "description": "Contoh: server Express fiktif, src/routes/*.js",
+                "auth": {
+                  "type": "noauth"
+                }
+              },
+              "event": [
+                {
+                  "listen": "test",
+                  "script": {
+                    "type": "text/javascript",
+                    "exec": [
+                      "pm.test('Ditolak dengan 400 (format email salah)', function () { pm.response.to.have.status(400); });",
+                      "pm.test('Tidak ada error server (bukan 5xx)', function () { pm.expect(pm.response.code).to.be.below(500); });"
+                    ]
+                  }
+                }
+              ]
+            },
+            {
+              "name": "[WC] Auth - register password terlalu pendek",
+              "request": {
+                "method": "POST",
+                "header": [
+                  {
+                    "key": "Content-Type",
+                    "value": "application/json"
+                  }
+                ],
+                "url": {
+                  "raw": "{{baseUrl}}/api/auth/register",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "api",
+                    "auth",
+                    "register"
+                  ]
+                },
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"email\": \"pendek_{{$timestamp}}@example.com\",\n  \"password\": \"abc\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                },
+                "description": "Contoh: server Express fiktif, src/routes/*.js",
+                "auth": {
+                  "type": "noauth"
+                }
+              },
+              "event": [
+                {
+                  "listen": "test",
+                  "script": {
+                    "type": "text/javascript",
+                    "exec": [
+                      "pm.test('Ditolak dengan 400 (password pendek)', function () { pm.response.to.have.status(400); });",
+                      "pm.test('Tidak ada error server (bukan 5xx)', function () { pm.expect(pm.response.code).to.be.below(500); });"
+                    ]
+                  }
+                }
+              ]
+            },
+            {
+              "name": "[WC] Auth - register JSON rusak",
+              "request": {
+                "method": "POST",
+                "header": [
+                  {
+                    "key": "Content-Type",
+                    "value": "application/json"
+                  }
+                ],
+                "url": {
+                  "raw": "{{baseUrl}}/api/auth/register",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "api",
+                    "auth",
+                    "register"
+                  ]
+                },
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\"email\": ",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                },
+                "description": "Contoh: server Express fiktif, src/routes/*.js",
+                "auth": {
+                  "type": "noauth"
+                }
+              },
+              "event": [
+                {
+                  "listen": "test",
+                  "script": {
+                    "type": "text/javascript",
+                    "exec": [
+                      "pm.test('Ditolak dengan 400 (JSON rusak)', function () { pm.response.to.have.status(400); });",
+                      "pm.test('Tidak ada error server (bukan 5xx)', function () { pm.expect(pm.response.code).to.be.below(500); });"
+                    ]
+                  }
+                }
+              ]
+            },
+            {
+              "name": "[WC] Auth - register email duplikat",
+              "request": {
+                "method": "POST",
+                "header": [
+                  {
+                    "key": "Content-Type",
+                    "value": "application/json"
+                  }
+                ],
+                "url": {
+                  "raw": "{{baseUrl}}/api/auth/register",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "api",
+                    "auth",
+                    "register"
+                  ]
+                },
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"email\": \"{{userEmail}}\",\n  \"password\": \"{{userPassword}}\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                },
+                "description": "Contoh: server Express fiktif, src/routes/*.js | AC-1",
+                "auth": {
+                  "type": "noauth"
+                }
+              },
+              "event": [
+                {
+                  "listen": "test",
+                  "script": {
+                    "type": "text/javascript",
+                    "exec": [
+                      "pm.test('Ditolak dengan 409 (duplikat)', function () { pm.response.to.have.status(409); });",
+                      "pm.test('Tidak ada error server (bukan 5xx)', function () { pm.expect(pm.response.code).to.be.below(500); });"
+                    ]
+                  }
+                }
+              ]
+            },
+            {
+              "name": "[WC] Auth - login password salah",
+              "request": {
+                "method": "POST",
+                "header": [
+                  {
+                    "key": "Content-Type",
+                    "value": "application/json"
+                  }
+                ],
+                "url": {
+                  "raw": "{{baseUrl}}/api/auth/login",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "api",
+                    "auth",
+                    "login"
+                  ]
+                },
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"email\": \"{{userEmail}}\",\n  \"password\": \"salah-total-123\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                },
+                "description": "Contoh: server Express fiktif, src/routes/*.js",
+                "auth": {
+                  "type": "noauth"
+                }
+              },
+              "event": [
+                {
+                  "listen": "test",
+                  "script": {
+                    "type": "text/javascript",
+                    "exec": [
+                      "pm.test('Ditolak dengan 401 (password salah)', function () { pm.response.to.have.status(401); });",
+                      "pm.test('Tidak ada error server (bukan 5xx)', function () { pm.expect(pm.response.code).to.be.below(500); });"
+                    ]
+                  }
+                }
+              ]
+            },
+            {
+              "name": "[WC] Auth - login email tidak terdaftar",
+              "request": {
+                "method": "POST",
+                "header": [
+                  {
+                    "key": "Content-Type",
+                    "value": "application/json"
+                  }
+                ],
+                "url": {
+                  "raw": "{{baseUrl}}/api/auth/login",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "api",
+                    "auth",
+                    "login"
+                  ]
+                },
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"email\": \"tidak_ada_{{$timestamp}}@example.com\",\n  \"password\": \"{{userPassword}}\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                },
+                "description": "Contoh: server Express fiktif, src/routes/*.js",
+                "auth": {
+                  "type": "noauth"
+                }
+              },
+              "event": [
+                {
+                  "listen": "test",
+                  "script": {
+                    "type": "text/javascript",
+                    "exec": [
+                      "pm.test('Ditolak dengan 401 (user tidak ada)', function () { pm.response.to.have.status(401); });",
+                      "pm.test('Tidak ada error server (bukan 5xx)', function () { pm.expect(pm.response.code).to.be.below(500); });"
+                    ]
+                  }
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "name": "2.2 Items",
+          "item": [
+            {
+              "name": "[WC] Items - list tanpa token",
+              "request": {
+                "method": "GET",
+                "header": [],
+                "url": {
+                  "raw": "{{baseUrl}}/api/items",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "api",
+                    "items"
+                  ]
+                },
+                "description": "Contoh: server Express fiktif, src/routes/*.js",
+                "auth": {
+                  "type": "noauth"
+                }
+              },
+              "event": [
+                {
+                  "listen": "test",
+                  "script": {
+                    "type": "text/javascript",
+                    "exec": [
+                      "pm.test('Ditolak dengan 401 (tanpa token)', function () { pm.response.to.have.status(401); });",
+                      "pm.test('Tidak ada error server (bukan 5xx)', function () { pm.expect(pm.response.code).to.be.below(500); });"
+                    ]
+                  }
+                }
+              ]
+            },
+            {
+              "name": "[WC] Items - list token sampah",
+              "request": {
+                "method": "GET",
+                "header": [],
+                "url": {
+                  "raw": "{{baseUrl}}/api/items",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "api",
+                    "items"
+                  ]
+                },
+                "description": "Contoh: server Express fiktif, src/routes/*.js",
+                "auth": {
+                  "type": "bearer",
+                  "bearer": [
+                    {
+                      "key": "token",
+                      "value": "invalid.token.value",
+                      "type": "string"
+                    }
+                  ]
+                }
+              },
+              "event": [
+                {
+                  "listen": "test",
+                  "script": {
+                    "type": "text/javascript",
+                    "exec": [
+                      "pm.test('Ditolak dengan 401 (token tidak valid)', function () { pm.response.to.have.status(401); });",
+                      "pm.test('Tidak ada error server (bukan 5xx)', function () { pm.expect(pm.response.code).to.be.below(500); });"
+                    ]
+                  }
+                }
+              ]
+            },
+            {
+              "name": "[WC] Items - create tanpa name",
+              "request": {
+                "method": "POST",
+                "header": [
+                  {
+                    "key": "Content-Type",
+                    "value": "application/json"
+                  }
+                ],
+                "url": {
+                  "raw": "{{baseUrl}}/api/items",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "api",
+                    "items"
+                  ]
+                },
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"price\": 10\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                },
+                "description": "Contoh: server Express fiktif, src/routes/*.js"
+              },
+              "event": [
+                {
+                  "listen": "test",
+                  "script": {
+                    "type": "text/javascript",
+                    "exec": [
+                      "pm.test('Ditolak dengan 400 (name wajib)', function () { pm.response.to.have.status(400); });",
+                      "pm.test('Tidak ada error server (bukan 5xx)', function () { pm.expect(pm.response.code).to.be.below(500); });"
+                    ]
+                  }
+                }
+              ]
+            },
+            {
+              "name": "[WC] Items - name bukan string",
+              "request": {
+                "method": "POST",
+                "header": [
+                  {
+                    "key": "Content-Type",
+                    "value": "application/json"
+                  }
+                ],
+                "url": {
+                  "raw": "{{baseUrl}}/api/items",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "api",
+                    "items"
+                  ]
+                },
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"name\": 12345,\n  \"price\": 10\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                },
+                "description": "Contoh: server Express fiktif, src/routes/*.js"
+              },
+              "event": [
+                {
+                  "listen": "test",
+                  "script": {
+                    "type": "text/javascript",
+                    "exec": [
+                      "pm.test('Ditolak dengan 400 (tipe salah)', function () { pm.response.to.have.status(400); });",
+                      "pm.test('Tidak ada error server (bukan 5xx)', function () { pm.expect(pm.response.code).to.be.below(500); });"
+                    ]
+                  }
+                }
+              ]
+            },
+            {
+              "name": "[WC] Items - name 51 karakter",
+              "request": {
+                "method": "POST",
+                "header": [
+                  {
+                    "key": "Content-Type",
+                    "value": "application/json"
+                  }
+                ],
+                "url": {
+                  "raw": "{{baseUrl}}/api/items",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "api",
+                    "items"
+                  ]
+                },
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"name\": \"xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx\",\n  \"price\": 10\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                },
+                "description": "Contoh: server Express fiktif, src/routes/*.js | batas max 50"
+              },
+              "event": [
+                {
+                  "listen": "test",
+                  "script": {
+                    "type": "text/javascript",
+                    "exec": [
+                      "pm.test('Ditolak dengan 400 (melebihi batas)', function () { pm.response.to.have.status(400); });",
+                      "pm.test('Tidak ada error server (bukan 5xx)', function () { pm.expect(pm.response.code).to.be.below(500); });"
+                    ]
+                  }
+                }
+              ]
+            },
+            {
+              "name": "[WC] Items - price negatif",
+              "request": {
+                "method": "POST",
+                "header": [
+                  {
+                    "key": "Content-Type",
+                    "value": "application/json"
+                  }
+                ],
+                "url": {
+                  "raw": "{{baseUrl}}/api/items",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "api",
+                    "items"
+                  ]
+                },
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"name\": \"Item\",\n  \"price\": -1\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                },
+                "description": "Contoh: server Express fiktif, src/routes/*.js"
+              },
+              "event": [
+                {
+                  "listen": "test",
+                  "script": {
+                    "type": "text/javascript",
+                    "exec": [
+                      "pm.test('Ditolak dengan 400 (price < 0)', function () { pm.response.to.have.status(400); });",
+                      "pm.test('Tidak ada error server (bukan 5xx)', function () { pm.expect(pm.response.code).to.be.below(500); });"
+                    ]
+                  }
+                }
+              ]
+            },
+            {
+              "name": "[WC] Items - price berupa string",
+              "request": {
+                "method": "POST",
+                "header": [
+                  {
+                    "key": "Content-Type",
+                    "value": "application/json"
+                  }
+                ],
+                "url": {
+                  "raw": "{{baseUrl}}/api/items",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "api",
+                    "items"
+                  ]
+                },
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"name\": \"Item\",\n  \"price\": \"sepuluh\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                },
+                "description": "Contoh: server Express fiktif, src/routes/*.js"
+              },
+              "event": [
+                {
+                  "listen": "test",
+                  "script": {
+                    "type": "text/javascript",
+                    "exec": [
+                      "pm.test('Ditolak dengan 400 (tipe salah)', function () { pm.response.to.have.status(400); });",
+                      "pm.test('Tidak ada error server (bukan 5xx)', function () { pm.expect(pm.response.code).to.be.below(500); });"
+                    ]
+                  }
+                }
+              ]
+            },
+            {
+              "name": "[WC] Items - field tambahan (mass assignment)",
+              "request": {
+                "method": "POST",
+                "header": [
+                  {
+                    "key": "Content-Type",
+                    "value": "application/json"
+                  }
+                ],
+                "url": {
+                  "raw": "{{baseUrl}}/api/items",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "api",
+                    "items"
+                  ]
+                },
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"name\": \"Item\",\n  \"price\": 10,\n  \"id\": \"hacked\",\n  \"role\": \"admin\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                },
+                "description": "Contoh: server Express fiktif, src/routes/*.js | id harus dibuat server"
+              },
+              "event": [
+                {
+                  "listen": "test",
+                  "script": {
+                    "type": "text/javascript",
+                    "exec": [
+                      "pm.test('Diterima (field tambahan diabaikan) atau ditolak', function () { pm.expect([201, 400]).to.include(pm.response.code); });",
+                      "pm.test('Id tidak bisa ditimpa klien', function () { if (pm.response.code === 201) { pm.expect(pm.response.json().id).to.not.eql('hacked'); } });",
+                      "pm.test('Tidak ada error server (bukan 5xx)', function () { pm.expect(pm.response.code).to.be.below(500); });"
+                    ]
+                  }
+                }
+              ]
+            },
+            {
+              "name": "[WC] Items - karakter khusus pada name",
+              "request": {
+                "method": "POST",
+                "header": [
+                  {
+                    "key": "Content-Type",
+                    "value": "application/json"
+                  }
+                ],
+                "url": {
+                  "raw": "{{baseUrl}}/api/items",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "api",
+                    "items"
+                  ]
+                },
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"name\": \"' OR '1'='1 <script>alert(1)</script>\",\n  \"price\": 1\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                },
+                "description": "Contoh: server Express fiktif, src/routes/*.js | diperlakukan sebagai data biasa"
+              },
+              "event": [
+                {
+                  "listen": "test",
+                  "script": {
+                    "type": "text/javascript",
+                    "exec": [
+                      "pm.test('Diterima sebagai data atau ditolak', function () { pm.expect([201, 400]).to.include(pm.response.code); });",
+                      "pm.test('Tidak ada error server (bukan 5xx)', function () { pm.expect(pm.response.code).to.be.below(500); });"
+                    ]
+                  }
+                }
+              ]
+            },
+            {
+              "name": "[WC] Items - get id tidak ada",
+              "request": {
+                "method": "GET",
+                "header": [],
+                "url": {
+                  "raw": "{{baseUrl}}/api/items/00000000-0000-4000-8000-000000000000",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "api",
+                    "items",
+                    "00000000-0000-4000-8000-000000000000"
+                  ]
+                },
+                "description": "Contoh: server Express fiktif, src/routes/*.js"
+              },
+              "event": [
+                {
+                  "listen": "test",
+                  "script": {
+                    "type": "text/javascript",
+                    "exec": [
+                      "pm.test('Ditolak dengan 404 (tidak ditemukan)', function () { pm.response.to.have.status(404); });",
+                      "pm.test('Tidak ada error server (bukan 5xx)', function () { pm.expect(pm.response.code).to.be.below(500); });"
+                    ]
+                  }
+                }
+              ]
+            },
+            {
+              "name": "[WC] Items - update id tidak ada",
+              "request": {
+                "method": "PUT",
+                "header": [
+                  {
+                    "key": "Content-Type",
+                    "value": "application/json"
+                  }
+                ],
+                "url": {
+                  "raw": "{{baseUrl}}/api/items/00000000-0000-4000-8000-000000000000",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "api",
+                    "items",
+                    "00000000-0000-4000-8000-000000000000"
+                  ]
+                },
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"name\": \"x\",\n  \"price\": 1\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                },
+                "description": "Contoh: server Express fiktif, src/routes/*.js"
+              },
+              "event": [
+                {
+                  "listen": "test",
+                  "script": {
+                    "type": "text/javascript",
+                    "exec": [
+                      "pm.test('Ditolak dengan 404 (tidak ditemukan)', function () { pm.response.to.have.status(404); });",
+                      "pm.test('Tidak ada error server (bukan 5xx)', function () { pm.expect(pm.response.code).to.be.below(500); });"
+                    ]
+                  }
+                }
+              ]
+            },
+            {
+              "name": "[WC] Items - PATCH pada koleksi (metode tidak didukung)",
+              "request": {
+                "method": "PATCH",
+                "header": [
+                  {
+                    "key": "Content-Type",
+                    "value": "application/json"
+                  }
+                ],
+                "url": {
+                  "raw": "{{baseUrl}}/api/items",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "api",
+                    "items"
+                  ]
+                },
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"name\": \"x\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                },
+                "description": "[Asumsi] ekspektasi status tidak ditegaskan kode; dipakai rentang 4xx."
+              },
+              "event": [
+                {
+                  "listen": "test",
+                  "script": {
+                    "type": "text/javascript",
+                    "exec": [
+                      "pm.test('Ditolak dengan 4xx', function () { pm.expect(pm.response.code).to.be.within(400, 499); });",
+                      "pm.test('Tidak ada error server (bukan 5xx)', function () { pm.expect(pm.response.code).to.be.below(500); });"
+                    ]
+                  }
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "name": "3. Cleanup",
+      "item": [
+        {
+          "name": "[Cleanup] Items - delete",
+          "request": {
+            "method": "DELETE",
+            "header": [],
+            "url": {
+              "raw": "{{baseUrl}}/api/items/{{itemId}}",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "api",
+                "items",
+                "{{itemId}}"
+              ]
+            },
+            "description": "Contoh: server Express fiktif, src/routes/*.js"
+          },
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "pm.test('Status 204 No Content', function () { pm.response.to.have.status(204); });"
+                ]
+              }
+            }
+          ]
+        },
+        {
+          "name": "[Cleanup] Items - get setelah delete",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{baseUrl}}/api/items/{{itemId}}",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "api",
+                "items",
+                "{{itemId}}"
+              ]
+            },
+            "description": "Contoh: server Express fiktif, src/routes/*.js"
+          },
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "pm.test('Data sudah hilang (404)', function () { pm.response.to.have.status(404); });"
+                ]
+              }
+            }
+          ]
+        },
+        {
+          "name": "[Cleanup] Items - delete dua kali",
+          "request": {
+            "method": "DELETE",
+            "header": [],
+            "url": {
+              "raw": "{{baseUrl}}/api/items/{{itemId}}",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "api",
+                "items",
+                "{{itemId}}"
+              ]
+            },
+            "description": "Contoh: server Express fiktif, src/routes/*.js"
+          },
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "pm.test('Hapus kedua kali ditolak (404)', function () { pm.response.to.have.status(404); });",
+                  "pm.test('Tidak ada error server (bukan 5xx)', function () { pm.expect(pm.response.code).to.be.below(500); });"
+                ]
+              }
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}
