@@ -81,3 +81,10 @@ export interface FAQItem {
   answer: string;
 }
 
+export interface ContactFormData {
+  name: string;
+  email: string;
+  subject: string;
+  message: string;
+}
+
