@@ -29,3 +29,10 @@ yarn-error.log*
 *.tsbuildinfo
 next-env.d.ts
 
+# agents & project docs
+.agents/
+docs/
+orchestrator/
+templates/
+templates/
+orchestrator/
