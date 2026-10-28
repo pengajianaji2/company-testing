@@ -90,22 +90,22 @@ export const timelineMilestones: TimelineMilestone[] = [
 
 export const teamMembers: TeamMember[] = [
   {
-    name: 'Andi Prasetyo',
+    name: 'Rinovan Jenner',
     role: 'Pendiri & Direktur Utama',
     image: '/images/team/team-1.jpg',
   },
   {
-    name: 'Budi Hartono',
+    name: 'Damar Gilang',
     role: 'Kepala Produksi & Master Blender',
     image: '/images/team/team-2.jpg',
   },
   {
-    name: 'Rendy Pratama',
+    name: 'Said Daffa',
     role: 'Manajer Perkebunan & Petani',
     image: '/images/team/team-3.jpg',
   },
   {
-    name: 'Dimas Setiawan',
+    name: 'Rifqi Maulana Kabuki',
     role: 'Manajer Pemasaran & Kemitraan',
     image: '/images/team/team-4.jpg',
   },

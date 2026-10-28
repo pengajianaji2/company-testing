@@ -276,39 +276,125 @@ export default function AboutPage() {
             </Box>
           </FadeIn>
 
-          <SimpleGrid cols={{ base: 1, sm: 2, lg: 4 }} spacing={rem(24)}>
-            {teamMembers.map((member, idx) => (
-              <FadeIn key={member.name} delay={idx * 0.1}>
-                <Card
-                  p={0}
-                  radius="lg"
-                  style={{
-                    backgroundColor: '#FFFFFF',
-                    border: '1px solid #E2D9C8',
-                    overflow: 'hidden',
-                    textAlign: 'center',
-                  }}
-                >
-                  <Box style={{ position: 'relative', width: '100%', height: rem(260) }}>
-                    <Image
-                      src={member.image}
-                      alt={member.name}
-                      fill
-                      style={{ objectFit: 'cover' }}
-                    />
-                  </Box>
-                  <Box p="md">
-                    <Title order={4} fz="md" c="#1C2A16" style={{ fontFamily: 'var(--font-playfair)' }}>
-                      {member.name}
-                    </Title>
-                    <Text fz="xs" c="#6B4423" fw={500} mt={4}>
-                      {member.role}
-                    </Text>
-                  </Box>
-                </Card>
-              </FadeIn>
-            ))}
-          </SimpleGrid>
+          {/* Baris 1: Pendiri (Kartu Tunggal di Tengah Sesuai Referensi) */}
+          {teamMembers.length > 0 && (
+            <Box
+              style={{
+                display: 'flex',
+                justifyContent: 'center',
+                marginBottom: rem(28),
+              }}
+            >
+              <Box style={{ width: '100%', maxWidth: rem(280) }}>
+                <FadeIn delay={0.1}>
+                  <Card
+                    p="md"
+                    radius="lg"
+                    style={{
+                      backgroundColor: '#FFFFFF',
+                      border: '1px solid #E2D9C8',
+                      boxShadow: '0 8px 24px rgba(44, 51, 40, 0.06)',
+                      textAlign: 'center',
+                      transition: 'transform 0.2s ease, box-shadow 0.2s ease',
+                    }}
+                  >
+                    <Box
+                      style={{
+                        position: 'relative',
+                        width: '100%',
+                        height: rem(250),
+                        borderRadius: rem(12),
+                        overflow: 'hidden',
+                      }}
+                    >
+                      <Image
+                        src={teamMembers[0].image}
+                        alt={teamMembers[0].name}
+                        fill
+                        sizes="(max-width: 768px) 100vw, 280px"
+                        style={{ objectFit: 'cover' }}
+                      />
+                    </Box>
+                    <Box pt="md" pb="xs">
+                      <Title
+                        order={4}
+                        fz="md"
+                        c="#1C2A16"
+                        style={{
+                          fontFamily: 'var(--font-playfair)',
+                          fontWeight: 700,
+                          lineHeight: 1.3,
+                        }}
+                      >
+                        {teamMembers[0].name}
+                      </Title>
+                      <Text fz="xs" c="#6B4423" fw={500} mt={4}>
+                        {teamMembers[0].role}
+                      </Text>
+                    </Box>
+                  </Card>
+                </FadeIn>
+              </Box>
+            </Box>
+          )}
+
+          {/* Baris 2: Tiga Anggota Tim Utama Sejajar */}
+          {teamMembers.length > 1 && (
+            <Box style={{ maxWidth: rem(900), margin: '0 auto' }}>
+              <SimpleGrid cols={{ base: 1, sm: 2, md: 3 }} spacing={rem(24)}>
+                {teamMembers.slice(1).map((member, idx) => (
+                  <FadeIn key={member.name} delay={0.15 + idx * 0.1}>
+                    <Card
+                      p="md"
+                      radius="lg"
+                      style={{
+                        backgroundColor: '#FFFFFF',
+                        border: '1px solid #E2D9C8',
+                        boxShadow: '0 8px 24px rgba(44, 51, 40, 0.06)',
+                        textAlign: 'center',
+                        transition: 'transform 0.2s ease, box-shadow 0.2s ease',
+                      }}
+                    >
+                      <Box
+                        style={{
+                          position: 'relative',
+                          width: '100%',
+                          height: rem(250),
+                          borderRadius: rem(12),
+                          overflow: 'hidden',
+                        }}
+                      >
+                        <Image
+                          src={member.image}
+                          alt={member.name}
+                          fill
+                          sizes="(max-width: 768px) 100vw, (max-width: 992px) 50vw, 280px"
+                          style={{ objectFit: 'cover' }}
+                        />
+                      </Box>
+                      <Box pt="md" pb="xs">
+                        <Title
+                          order={4}
+                          fz="md"
+                          c="#1C2A16"
+                          style={{
+                            fontFamily: 'var(--font-playfair)',
+                            fontWeight: 700,
+                            lineHeight: 1.3,
+                          }}
+                        >
+                          {member.name}
+                        </Title>
+                        <Text fz="xs" c="#6B4423" fw={500} mt={4}>
+                          {member.role}
+                        </Text>
+                      </Box>
+                    </Card>
+                  </FadeIn>
+                ))}
+              </SimpleGrid>
+            </Box>
+          )}
         </Container>
       </Box>
 

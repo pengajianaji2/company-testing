@@ -31,7 +31,7 @@ export const articlesData: Article[] = [
     category: 'Manfaat Teh',
     date: '08 Maret 2026',
     readTime: '3 menit baca',
-    author: 'Budi Hartono',
+    author: 'Damar Gilang',
     excerpt:
       'Kaya antioksidan epigallocatechin gallate (EGCG), teh hijau dipercaya menjaga metabolisme tubuh, kebugaran pikiran, dan kesehatan jantung.',
     content: [
@@ -49,7 +49,7 @@ export const articlesData: Article[] = [
     category: 'Resep',
     date: '02 Maret 2026',
     readTime: '3 menit baca',
-    author: 'Rendy Pratama',
+    author: 'Said Daffa',
     excerpt:
       'Paduan harum bunga melati asli Jawa Barat dengan kesegaran bulir lemon madu siap mengembalikan kesegaran di siang hari yang terik.',
     content: [
@@ -85,7 +85,7 @@ export const articlesData: Article[] = [
     category: 'Tips Seduh',
     date: '10 Februari 2026',
     readTime: '3 menit baca',
-    author: 'Andi Prasetyo',
+    author: 'Rinovan Jenner',
     excerpt:
       'Daun teh bersifat higroskopis dan mudah menyerap aroma di sekitarnya. Ketahui cara penyimpanan yang tepat agar kualitasnya awet hingga 1 tahun.',
     content: [
