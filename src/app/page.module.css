@@ -1,0 +1,31 @@
+.categoryCard {
+  background-color: #FFFFFF;
+  border: 1px solid #D9C9A0;
+  transition: all 0.25s cubic-bezier(0.16, 1, 0.3, 1);
+  cursor: pointer;
+}
+
+.categoryCard:hover {
+  background-color: #4A6B3A !important;
+  transform: translateY(-4px);
+  box-shadow: 0 12px 24px rgba(74, 107, 58, 0.18);
+}
+
+.categoryCard:hover .categoryTitle {
+  color: #FFFFFF !important;
+}
+
+.categoryCard:hover .categoryDesc {
+  color: #E2ECD9 !important;
+}
+
+.cardTitleLink {
+  color: #1C2A16;
+  text-decoration: none;
+  transition: color 0.15s ease;
+}
+
+.cardTitleLink:hover {
+  color: #4A6B3A;
+}
+

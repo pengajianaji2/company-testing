@@ -60,7 +60,7 @@ export default function NotFound() {
             Ups, Halaman Tidak Ditemukan
           </Title>
 
-          <Text c="#6B7365" fz="md" style={{ lineHeight: 1.7, marginBottom: rem(32) }}>
+          <Text c="#4E5549" fz="md" style={{ lineHeight: 1.7, marginBottom: rem(32) }}>
             Sepertinya halaman yang kamu cari sudah tersesat di tengah kebun teh. Yuk, kembali ke beranda untuk menikmati seduhan teh terbaik kami.
           </Text>
 

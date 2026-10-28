@@ -4,11 +4,18 @@ import { useQuery } from '@tanstack/react-query';
 import { productsData } from '@/data/products';
 import { Product, ProductCategory } from '@/types';
 
+/**
+ * Hook untuk mengambil daftar produk dengan filter kategori dan pencarian reaktif (US-2 / AC-3).
+ *
+ * @param category Kategori produk yang dipilih ('Semua', 'Teh Hitam', dll.)
+ * @param searchQuery Kata kunci pencarian pada nama, deskripsi, atau tasting notes
+ * @returns Query object TanStack Query dengan data produk yang terfilter
+ */
 export function useProducts(category: ProductCategory = 'Semua', searchQuery: string = '') {
   return useQuery({
     queryKey: ['products', category, searchQuery],
     queryFn: async (): Promise<Product[]> => {
-      // Simulate light async fetching for standard TanStack Query lifecycle
+      // Simulasi delay asinkron ringan untuk siklus TanStack Query
       await new Promise((resolve) => setTimeout(resolve, 50));
 
       return productsData.filter((product) => {
@@ -28,6 +35,12 @@ export function useProducts(category: ProductCategory = 'Semua', searchQuery: st
   });
 }
 
+/**
+ * Hook untuk mengambil detail spesifikasi satu produk berdasarkan slug unik (US-2 / AC-5).
+ *
+ * @param slug Identifier URL produk (contoh: 'teh-hitam-priangan')
+ * @returns Query object berisi data produk spesifik atau null jika tidak ditemukan
+ */
 export function useProductBySlug(slug: string) {
   return useQuery({
     queryKey: ['product', slug],
@@ -39,6 +52,12 @@ export function useProductBySlug(slug: string) {
   });
 }
 
+/**
+ * Hook untuk mengambil daftar produk terkait berdasarkan array slug (US-2 / AC-5).
+ *
+ * @param relatedSlugs Array slug produk yang direkomendasikan
+ * @returns Query object berisi daftar produk terkait
+ */
 export function useRelatedProducts(relatedSlugs: string[]) {
   return useQuery({
     queryKey: ['related-products', relatedSlugs],
@@ -48,4 +67,3 @@ export function useRelatedProducts(relatedSlugs: string[]) {
     },
   });
 }
-

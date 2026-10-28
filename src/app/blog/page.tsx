@@ -47,7 +47,7 @@ export default function BlogPage() {
             >
               Cerita, Tips, & Inspirasi
             </Title>
-            <Text fz={{ base: 'md', sm: 'lg' }} c="#6B7365">
+            <Text fz={{ base: 'md', sm: 'lg' }} c="#4E5549">
               Menjelajahi kehangatan dunia teh nusantara. Dari teknik seduh ideal, rahasia kesehatan daun teh, hingga resep racikan segar.
             </Text>
           </Box>
@@ -113,7 +113,7 @@ export default function BlogPage() {
             <Title order={3} fz="xl" c="#1C2A16" style={{ fontFamily: 'var(--font-playfair)' }} mb={8}>
               Belum Ada Artikel di Kategori Ini
             </Title>
-            <Text fz="sm" c="#6B7365" mb="lg">
+            <Text fz="sm" c="#4E5549" mb="lg">
               Kami sedang menyiapkan tulisan-tulisan menarik untuk kategori &quot;{category}&quot;.
             </Text>
             <Button

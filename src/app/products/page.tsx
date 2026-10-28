@@ -45,7 +45,7 @@ export default function ProductsPage() {
             >
               Koleksi Teh Nusantara
             </Title>
-            <Text fz={{ base: 'md', sm: 'lg' }} c="#6B7365">
+            <Text fz={{ base: 'md', sm: 'lg' }} c="#4E5549">
               Temukan teh favoritmu dari kebun-kebun terbaik Indonesia. Dipetik segar, diproses higienis, dan dikemas kedap udara.
             </Text>
           </Box>
@@ -112,7 +112,7 @@ export default function ProductsPage() {
             <Title order={3} fz="xl" c="#1C2A16" style={{ fontFamily: 'var(--font-playfair)' }} mb={8}>
               Tidak Ada Produk yang Cocok
             </Title>
-            <Text fz="sm" c="#6B7365" mb="lg">
+            <Text fz="sm" c="#4E5549" mb="lg">
               Kami tidak menemukan varian teh untuk kata kunci &quot;{searchQuery}&quot; pada kategori &quot;{category}&quot;.
             </Text>
             <Button
@@ -129,7 +129,7 @@ export default function ProductsPage() {
         {/* Products Grid */}
         {!isLoading && products && products.length > 0 && (
           <Box>
-            <Text fz="xs" c="#6B7365" mb="md">
+            <Text fz="xs" c="#4E5549" mb="md">
               Menampilkan {products.length} varian teh pilihan
             </Text>
             <SimpleGrid cols={{ base: 1, sm: 2, lg: 4 }} spacing={rem(24)}>

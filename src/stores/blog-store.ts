@@ -10,6 +10,9 @@ interface BlogState {
   resetFilters: () => void;
 }
 
+/**
+ * Zustand Store untuk mengelola state filter kategori dan pagination jurnal artikel teh (US-3 / AC-6).
+ */
 export const useBlogStore = create<BlogState>((set) => ({
   category: 'Semua',
   currentPage: 1,
@@ -18,4 +21,3 @@ export const useBlogStore = create<BlogState>((set) => ({
   setPage: (currentPage) => set({ currentPage }),
   resetFilters: () => set({ category: 'Semua', currentPage: 1 }),
 }));
-

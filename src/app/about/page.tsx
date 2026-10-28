@@ -56,7 +56,7 @@ export default function AboutPage() {
             >
               Menghidupkan Kembali Budaya Teh Asli Nusantara
             </Title>
-            <Text fz={{ base: 'md', sm: 'lg' }} c="#6B7365" style={{ lineHeight: 1.8 }}>
+            <Text fz={{ base: 'md', sm: 'lg' }} c="#4E5549" style={{ lineHeight: 1.8 }}>
               Kisah perjalanan kami berakar dari tanah subur Jawa Barat, dedikasi petani lokal, dan semangat mempersembahkan seduhan teh murni terbaik.
             </Text>
           </Box>
@@ -79,7 +79,7 @@ export default function AboutPage() {
                 }}
               >
                 <Image
-                  src="https://images.unsplash.com/photo-1576092768241-dec231879fc3?auto=format&fit=crop&w=1000&h=667&q=80"
+                  src="/images/about/about-history.webp"
                   alt="Kisah Berdirinya Teh Nusantara Lembang"
                   fill
                   style={{ objectFit: 'cover' }}
@@ -106,7 +106,7 @@ export default function AboutPage() {
               <Text c="#2C3328" style={{ lineHeight: 1.8, marginBottom: rem(16) }}>
                 {companyProfile.fullStory}
               </Text>
-              <Text c="#6B7365" style={{ lineHeight: 1.7 }}>
+              <Text c="#4E5549" style={{ lineHeight: 1.7 }}>
                 Kami percaya secangkir teh yang baik bukan sekadar soal rasa, melainkan ikatan kebersamaan, rasa hormat pada alam, dan kepedulian nyata pada kesejahteraan para petani yang merawatnya setiap fajar.
               </Text>
             </FadeIn>
@@ -222,7 +222,7 @@ export default function AboutPage() {
               >
                 Perjalanan Teh Nusantara
               </Title>
-              <Text c="#6B7365" mt={4}>
+              <Text c="#4E5549" mt={4}>
                 Tonggak sejarah dedikasi kami dari tahun ke tahun.
               </Text>
             </Box>
@@ -270,7 +270,7 @@ export default function AboutPage() {
               >
                 Tim Teh Nusantara
               </Title>
-              <Text c="#6B7365" mt={4}>
+              <Text c="#4E5549" mt={4}>
                 Para pecinta teh yang mendedikasikan keahlian mereka demi kualitas cangkir Anda.
               </Text>
             </Box>
@@ -362,7 +362,7 @@ export default function AboutPage() {
                       <Text fw={600} fz="sm" c="#1C2A16">
                         {item.title}
                       </Text>
-                      <Text fz="xs" c="#6B7365">
+                      <Text fz="xs" c="#4E5549">
                         {item.description}
                       </Text>
                     </Box>
@@ -376,4 +376,5 @@ export default function AboutPage() {
     </Box>
   );
 }
+
 

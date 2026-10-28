@@ -37,7 +37,7 @@ export default function ContactPage() {
             >
               Mari Terhubung & Berbincang
             </Title>
-            <Text fz={{ base: 'md', sm: 'lg' }} c="#6B7365">
+            <Text fz={{ base: 'md', sm: 'lg' }} c="#4E5549">
               Apakah Anda ingin memesan teh dalam jumlah khusus, bermitra sebagai reseller, atau sekadar menyapa dan bertanya seputar kebun kami? Kami dengan senang hati siap mendengarkan.
             </Text>
           </Box>

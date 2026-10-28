@@ -1,5 +1,13 @@
 import { z } from 'zod';
 
+/**
+ * Skema validasi Zod untuk formulir kontak publik Teh Nusantara (US-4).
+ * Memvalidasi batas input sebelum pengiriman pesan:
+ * - name: minimal 3 karakter
+ * - email: format email terstandarisasi
+ * - subject: minimal 3 karakter
+ * - message: minimal 10 karakter
+ */
 export const contactSchema = z.object({
   name: z
     .string()
@@ -16,4 +24,3 @@ export const contactSchema = z.object({
 });
 
 export type ContactSchemaType = z.infer<typeof contactSchema>;
-

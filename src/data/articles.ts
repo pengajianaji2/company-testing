@@ -21,7 +21,7 @@ export const articlesData: Article[] = [
       '5. Menyimpan teh sembarangan. Teh yang terpapar udara terbuka dan ruangan lembap akan menyerap bau lain serta kehilangan minyak atsirinya.',
       'Dengan sedikit perhatian ekstra pada suhu, waktu seduh, dan takaran yang pas, setiap tegukan teh Nusantara Anda akan terasa jauh lebih lembut, manis alami, dan menenangkan. Selamat mencoba!',
     ],
-    image: 'https://images.unsplash.com/photo-1576092768241-dec231879fc3?auto=format&fit=crop&w=800&h=450&q=80',
+    image: '/images/articles/brew-mistakes.jpg',
     relatedSlugs: ['cara-menyimpan-teh-agar-aroma-tetap-terjaga', 'manfaat-teh-hijau-untuk-kesehatan-sehari-hari'],
   },
   {
@@ -31,7 +31,7 @@ export const articlesData: Article[] = [
     category: 'Manfaat Teh',
     date: '08 Maret 2026',
     readTime: '3 menit baca',
-    author: 'Siti Rahmawati',
+    author: 'Budi Hartono',
     excerpt:
       'Kaya antioksidan epigallocatechin gallate (EGCG), teh hijau dipercaya menjaga metabolisme tubuh, kebugaran pikiran, dan kesehatan jantung.',
     content: [
@@ -39,7 +39,7 @@ export const articlesData: Article[] = [
       'Zat aktif utama dalam teh hijau, yaitu EGCG (Epigallocatechin gallate), memiliki kemampuan melawan radikal bebas dalam tubuh secara efektif.',
       'Rutin meminum satu hingga dua cangkir teh hijau hangat setiap pagi dapat membantu menjaga konsentrasi berkat kombinasi asam amino L-theanine dan kafein alami yang seimbang.',
     ],
-    image: 'https://images.unsplash.com/photo-1597481499750-3e6b22637e12?auto=format&fit=crop&w=800&h=450&q=80',
+    image: '/images/articles/daun-teh-hijau.jpg',
     relatedSlugs: ['perbedaan-teh-hitam-hijau-dan-putih', '5-kesalahan-saat-menyeduh-teh-yang-bikin-rasanya-pahit'],
   },
   {
@@ -49,7 +49,7 @@ export const articlesData: Article[] = [
     category: 'Resep',
     date: '02 Maret 2026',
     readTime: '3 menit baca',
-    author: 'Budi Hartono',
+    author: 'Rendy Pratama',
     excerpt:
       'Paduan harum bunga melati asli Jawa Barat dengan kesegaran bulir lemon madu siap mengembalikan kesegaran di siang hari yang terik.',
     content: [
@@ -57,7 +57,7 @@ export const articlesData: Article[] = [
       'Cukup seduh 4 gram Teh Melati Premium Teh Nusantara dalam 250 ml air panas bersuhu 85°C selama 4 menit, kemudian dinginkan.',
       'Tambahkan 2 sendok makan madu murni dan perasan setengah buah lemon segar. Aduk rata bersama es batu dan hias dengan potongan lemon.',
     ],
-    image: 'https://images.unsplash.com/photo-1556679343-c7306c1976bc?auto=format&fit=crop&w=800&h=450&q=80',
+    image: '/images/articles/lemon-dan-melati.jpg',
     relatedSlugs: ['5-kesalahan-saat-menyeduh-teh-yang-bikin-rasanya-pahit', 'cara-menyimpan-teh-agar-aroma-tetap-terjaga'],
   },
   {
@@ -75,28 +75,11 @@ export const articlesData: Article[] = [
       'Teh putih merupakan jenis yang paling minim diproses; hanya dipetik pucuknya lalu dikeringkan perlahan di udara sejuk.',
       'Teh hijau melalui pemanasan cepat untuk menghentikan oksidasi sel daun, sementara teh hitam dioksidasi penuh hingga daun berwarna gelap kemerahan dengan aroma hangat pekat.',
     ],
-    image: 'https://images.unsplash.com/photo-1563822249548-9a72b6353cd1?auto=format&fit=crop&w=800&h=450&q=80',
+    image: '/images/articles/perbedaan-daun-teh.jpg',
     relatedSlugs: ['manfaat-teh-hijau-untuk-kesehatan-sehari-hari', '5-kesalahan-saat-menyeduh-teh-yang-bikin-rasanya-pahit'],
   },
   {
     id: 'art-5',
-    slug: 'teh-nusantara-hadir-di-pameran-kuliner-2026',
-    title: 'Teh Nusantara Hadir di Pameran Kuliner 2026',
-    category: 'Berita',
-    date: '18 Februari 2026',
-    readTime: '2 menit baca',
-    author: 'Nadia Putri',
-    excerpt:
-      'Kunjungi stan pameran kami di Jakarta International Expo untuk mencicipi langsung aneka seduhan teh pegunungan Priangan.',
-    content: [
-      'Kami bangga mengumumkan bahwa Teh Nusantara terpilih menjadi salah satu perwakilan UMKM agrikultur binaan Jawa Barat di ajang Pameran Kuliner Nusantara 2026.',
-      'Acara yang berlangsung selama lima hari ini menghadirkan pengalaman seduh interaktif (tea tasting session) gratis bagi para pengunjung yang ingin mengenal profil rasa teh dataran tinggi Priangan.',
-    ],
-    image: 'https://images.unsplash.com/photo-1544787219-7f47ccb76574?auto=format&fit=crop&w=800&h=450&q=80',
-    relatedSlugs: ['perbedaan-teh-hitam-hijau-dan-putih', 'es-teh-melati-lemon-resep-segar-untuk-cuaca-panas'],
-  },
-  {
-    id: 'art-6',
     slug: 'cara-menyimpan-teh-agar-aroma-tetap-terjaga',
     title: 'Cara Menyimpan Teh agar Aroma Tetap Terjaga',
     category: 'Tips Seduh',
@@ -110,8 +93,7 @@ export const articlesData: Article[] = [
       'Langkah pertama: selalu simpan teh dalam wadah kedap udara (airtight container), lebih baik kaleng berlapis gelap atau kaca berwarna.',
       'Langkah kedua: jauhkan dari bumbu dapur beraroma tajam seperti bawang dan rempah dapur basah. Simpan di tempat yang sejuk dan terlindung dari sinar matahari langsung.',
     ],
-    image: 'https://images.unsplash.com/photo-1514432324607-a09d9b4aefdd?auto=format&fit=crop&w=800&h=450&q=80',
+    image: '/images/articles/tea-storage.jpg',
     relatedSlugs: ['5-kesalahan-saat-menyeduh-teh-yang-bikin-rasanya-pahit', 'es-teh-melati-lemon-resep-segar-untuk-cuaca-panas'],
   },
 ];
-

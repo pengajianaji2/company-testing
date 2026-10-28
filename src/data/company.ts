@@ -92,22 +92,22 @@ export const teamMembers: TeamMember[] = [
   {
     name: 'Andi Prasetyo',
     role: 'Pendiri & Direktur Utama',
-    image: 'https://images.unsplash.com/photo-1534528741775-53994a69daeb?auto=format&fit=crop&w=400&h=400&q=80',
-  },
-  {
-    name: 'Siti Rahmawati',
-    role: 'Kepala Produksi',
-    image: 'https://images.unsplash.com/photo-1580489944761-15a19d654956?auto=format&fit=crop&w=400&h=400&q=80',
+    image: '/images/team/team-1.jpg',
   },
   {
     name: 'Budi Hartono',
-    role: 'Master Blender Teh',
-    image: 'https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?auto=format&fit=crop&w=400&h=400&q=80',
+    role: 'Kepala Produksi & Master Blender',
+    image: '/images/team/team-2.jpg',
   },
   {
-    name: 'Nadia Putri',
-    role: 'Manajer Pemasaran',
-    image: 'https://images.unsplash.com/photo-1573496359142-b8d87734a5a2?auto=format&fit=crop&w=400&h=400&q=80',
+    name: 'Rendy Pratama',
+    role: 'Manajer Perkebunan & Petani',
+    image: '/images/team/team-3.jpg',
+  },
+  {
+    name: 'Dimas Setiawan',
+    role: 'Manajer Pemasaran & Kemitraan',
+    image: '/images/team/team-4.jpg',
   },
 ];
 
@@ -116,37 +116,31 @@ export const processSteps: ProcessStep[] = [
     number: '01',
     title: 'Petik',
     description: 'Hanya pucuk dan dua daun muda dipetik dengan tangan di pagi hari saat kesegaran daun berada di puncak.',
-    image: 'https://images.unsplash.com/photo-1576092768241-dec231879fc3?auto=format&fit=crop&w=800&h=533&q=80',
+    image: '/images/process/petik.jpg',
   },
   {
     number: '02',
-    title: 'Layu',
-    description: 'Daun dihamparkan secara merata selama 12 sampai 18 jam agar kadar air berkurang dan daun menjadi lentur.',
-    image: 'https://images.unsplash.com/photo-1597481499750-3e6b22637e12?auto=format&fit=crop&w=800&h=533&q=80',
+    title: 'Giling',
+    description: 'Daun digulung secara terkontrol untuk memecah dinding sel dan melepaskan minyak atsiri penghasil aroma.',
+    image: '/images/process/giling.jpg',
   },
   {
     number: '03',
-    title: 'Giling',
-    description: 'Daun digulung secara terkontrol untuk memecah dinding sel dan melepaskan minyak atsiri penghasil aroma.',
-    image: 'https://images.unsplash.com/photo-1563822249548-9a72b6353cd1?auto=format&fit=crop&w=800&h=533&q=80',
+    title: 'Fermentasi',
+    description: 'Khusus varian teh hitam, daun dioksidasi pada kelembapan presisi hingga warna merah kecokelatan dan profil rasa pekat terbentuk.',
+    image: '/images/process/fermentasi.jpg',
   },
   {
     number: '04',
-    title: 'Fermentasi',
-    description: 'Khusus varian teh hitam, daun dioksidasi pada kelembapan presisi hingga warna merah kecokelatan dan profil rasa pekat terbentuk.',
-    image: 'https://images.unsplash.com/photo-1544787219-7f47ccb76574?auto=format&fit=crop&w=800&h=533&q=80',
+    title: 'Pengeringan',
+    description: 'Daun dikeringkan pada suhu yang stabil untuk menghentikan oksidasi serta mengunci cita rasa khas pegunungan.',
+    image: '/images/process/pengeringan.jpg',
   },
   {
     number: '05',
-    title: 'Pengeringan',
-    description: 'Daun dikeringkan pada suhu yang stabil untuk menghentikan oksidasi serta mengunci cita rasa khas pegunungan.',
-    image: 'https://images.unsplash.com/photo-1594631252845-29fc4cc8cde9?auto=format&fit=crop&w=800&h=533&q=80',
-  },
-  {
-    number: '06',
     title: 'Kemas',
     description: 'Teh disortir berdasarkan ukuran partikel lalu dikemas kedap udara agar aroma harumnya tetap terjaga segar hingga dinikmati.',
-    image: 'https://images.unsplash.com/photo-1514432324607-a09d9b4aefdd?auto=format&fit=crop&w=800&h=533&q=80',
+    image: '/images/process/pengemasan.jpg',
   },
 ];
 
@@ -154,22 +148,22 @@ export const gardenGallery = [
   {
     title: 'Hamparan Perkebunan Priangan',
     description: 'Dataran tinggi 1.200 mdpl berselimut kabut pagi di Lembang.',
-    image: 'https://images.unsplash.com/photo-1506744038136-46273834b3fb?auto=format&fit=crop&w=1200&h=800&q=80',
+    image: '/images/hero/hero.webp',
   },
   {
     title: 'Aktivitas Petik Pagi',
     description: 'Petani mitra memetik pucuk daun teh terbaik dengan penuh kehati-hatian.',
-    image: 'https://images.unsplash.com/photo-1576092768241-dec231879fc3?auto=format&fit=crop&w=1200&h=800&q=80',
+    image: '/images/process/petik.jpg',
   },
   {
     title: 'Fasilitas Pengeringan Alami',
     description: 'Proses pengeringan daun teh dengan sirkulasi udara bersih pegunungan.',
-    image: 'https://images.unsplash.com/photo-1597481499750-3e6b22637e12?auto=format&fit=crop&w=1200&h=800&q=80',
+    image: '/images/process/pengeringan.jpg',
   },
   {
-    title: 'Secangkir Seduhan Hangat',
-    description: 'Hasil seduhan merah keemasan penuh ketenangan.',
-    image: 'https://images.unsplash.com/photo-1576092768241-dec231879fc3?auto=format&fit=crop&w=1200&h=800&q=80',
+    title: 'Daun Teh Segar Pilihan',
+    description: 'Daun teh muda berkualitas tinggi siap untuk diseduh.',
+    image: '/images/articles/daun-teh-hijau.jpg',
   },
 ];
 
@@ -228,4 +222,3 @@ export const faqList: FAQItem[] = [
       'Teh Nusantara dapat disimpan dengan baik hingga 12 bulan selama berada di wadah kedap udara, di tempat sejuk, kering, dan terhindar dari paparan sinar matahari langsung.',
   },
 ];
-

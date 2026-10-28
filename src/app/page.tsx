@@ -1,6 +1,4 @@
-'use client';
-
-import React, { useState } from 'react';
+import React from 'react';
 import Link from 'next/link';
 import Image from 'next/image';
 import {
@@ -14,10 +12,8 @@ import {
   SimpleGrid,
   Badge,
   Box,
-  TextInput,
   rem,
 } from '@mantine/core';
-import { notifications } from '@mantine/notifications';
 import {
   IconLeaf,
   IconArrowRight,
@@ -26,8 +22,6 @@ import {
   IconPlant,
   IconAward,
   IconPackage,
-  IconCheck,
-  IconMail,
   IconStarFilled,
   IconCalendar,
 } from '@tabler/icons-react';
@@ -35,40 +29,15 @@ import { companyProfile, bentoFeatures, testimonials } from '@/data/company';
 import { productsData } from '@/data/products';
 import { articlesData } from '@/data/articles';
 import { FadeIn } from '@/components/motion/fade-in';
+import { NewsletterForm } from '@/features/home/components/newsletter-form';
+import styles from './page.module.css';
 
 export default function HomePage() {
-  const [newsletterEmail, setNewsletterEmail] = useState('');
-  const [isSubscribing, setIsSubscribing] = useState(false);
-
   // 4 Produk Unggulan
   const featuredProducts = productsData.filter((p) => p.featured).slice(0, 4);
 
   // 3 Artikel Terbaru
   const latestArticles = articlesData.slice(0, 3);
-
-  const handleSubscribe = (e: React.FormEvent) => {
-    e.preventDefault();
-    if (!newsletterEmail || !newsletterEmail.includes('@')) {
-      notifications.show({
-        title: 'Email Tidak Valid',
-        message: 'Mohon masukkan alamat email yang benar.',
-        color: 'red',
-      });
-      return;
-    }
-
-    setIsSubscribing(true);
-    setTimeout(() => {
-      setIsSubscribing(false);
-      setNewsletterEmail('');
-      notifications.show({
-        title: 'Berhasil Berlangganan!',
-        message: 'Terima kasih, Anda akan menerima kabar terbaru dari kebun kami.',
-        color: 'primaryGreen',
-        icon: <IconCheck size={18} />,
-      });
-    }, 400);
-  };
 
   const getWaLink = (productName: string) => {
     const message = encodeURIComponent(
@@ -103,10 +72,11 @@ export default function HomePage() {
           >
             {/* Hero Background Image (next/image 1920x800) */}
             <Image
-              src="https://images.unsplash.com/photo-1506744038136-46273834b3fb?auto=format&fit=crop&w=1920&h=800&q=80"
+              src="/images/hero/hero.webp"
               alt="Perkebunan Teh Nusantara Lembang Jawa Barat"
               fill
               priority
+              sizes="100vw"
               style={{
                 objectFit: 'cover',
                 opacity: 0.42,
@@ -249,7 +219,7 @@ export default function HomePage() {
                 <Text fw={700} fz="md" c="#1C2A16">
                   40+ Mitra Petani
                 </Text>
-                <Text fz="xs" c="#6B7365">
+                <Text fz="xs" c="#4E5549">
                   100% Kebun Lokal Jawa Barat
                 </Text>
               </Box>
@@ -276,7 +246,7 @@ export default function HomePage() {
               >
                 Kenapa Teh Nusantara?
               </Title>
-              <Text c="#6B7365" mt={8} maw={rem(600)} mx="auto">
+              <Text c="#4E5549" mt={8} maw={rem(600)} mx="auto">
                 Komitmen kami menjaga kemurnian rasa dari tanah Priangan hingga ke setiap seduhan cangkir Anda.
               </Text>
             </Box>
@@ -292,23 +262,7 @@ export default function HomePage() {
                   <Card
                     p="xl"
                     radius="lg"
-                    style={{
-                      height: '100%',
-                      backgroundColor: '#FFFFFF',
-                      border: '1px solid #E2D9C8',
-                      boxShadow: '0 4px 16px rgba(44, 51, 40, 0.04)',
-                      transition: 'transform 0.2s ease, box-shadow 0.2s ease',
-                    }}
-                    onMouseEnter={(e) => {
-                      e.currentTarget.style.transform = 'translateY(-4px)';
-                      e.currentTarget.style.boxShadow =
-                        '0 12px 28px rgba(74, 107, 58, 0.12)';
-                    }}
-                    onMouseLeave={(e) => {
-                      e.currentTarget.style.transform = 'translateY(0)';
-                      e.currentTarget.style.boxShadow =
-                        '0 4px 16px rgba(44, 51, 40, 0.04)';
-                    }}
+                    className={styles.bentoCard}
                   >
                     <Box
                       style={{
@@ -331,7 +285,7 @@ export default function HomePage() {
                     <Title order={3} fz="lg" c="#1C2A16" mb={8}>
                       {item.title}
                     </Title>
-                    <Text fz="sm" c="#6B7365" style={{ lineHeight: 1.6 }}>
+                    <Text fz="sm" c="#4E5549" style={{ lineHeight: 1.6 }}>
                       {item.description}
                     </Text>
                   </Card>
@@ -360,7 +314,7 @@ export default function HomePage() {
               >
                 Produk Unggulan
               </Title>
-              <Text c="#6B7365" mt={4}>
+              <Text c="#4E5549" mt={4}>
                 Empat varian teh terbaik yang paling dicintai pelanggan kami.
               </Text>
             </FadeIn>
@@ -400,6 +354,7 @@ export default function HomePage() {
                       src={prod.image}
                       alt={prod.name}
                       fill
+                      sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 25vw"
                       style={{ objectFit: 'cover' }}
                     />
                     <Badge
@@ -421,24 +376,20 @@ export default function HomePage() {
                     <Box>
                       <Link
                         href={`/products/${prod.slug}`}
-                        style={{ textDecoration: 'none' }}
+                        className={styles.cardTitleLink}
                       >
                         <Title
-                          order={4}
-                          c="#1C2A16"
+                          order={3}
                           style={{
                             fontFamily: 'var(--font-playfair)',
                             fontSize: rem(18),
                             lineHeight: 1.3,
-                            transition: 'color 0.15s ease',
                           }}
-                          onMouseEnter={(e) => (e.currentTarget.style.color = '#4A6B3A')}
-                          onMouseLeave={(e) => (e.currentTarget.style.color = '#1C2A16')}
                         >
                           {prod.name}
                         </Title>
                       </Link>
-                      <Text fz="xs" c="#6B7365" mt={4} lineClamp={2}>
+                      <Text fz="xs" c="#4E5549" mt={4} lineClamp={2}>
                         {prod.description}
                       </Text>
                       <Text fw={600} fz="sm" c="#6B4423" mt={8}>
@@ -487,9 +438,10 @@ export default function HomePage() {
                 }}
               >
                 <Image
-                  src="https://images.unsplash.com/photo-1597481499750-3e6b22637e12?auto=format&fit=crop&w=1000&h=667&q=80"
+                  src="/images/hero/farmer.webp"
                   alt="Petani Teh Nusantara Lembang"
                   fill
+                  sizes="(max-width: 768px) 100vw, 50vw"
                   style={{ objectFit: 'cover' }}
                 />
               </Box>
@@ -514,7 +466,7 @@ export default function HomePage() {
               <Text c="#2C3328" style={{ lineHeight: 1.8, marginBottom: rem(20) }}>
                 {companyProfile.shortAbout}
               </Text>
-              <Text c="#6B7365" style={{ lineHeight: 1.7, marginBottom: rem(28) }}>
+              <Text c="#4E5549" style={{ lineHeight: 1.7, marginBottom: rem(28) }}>
                 Bermitra langsung dengan kelompok tani di Lembang, Pangalengan, Garut, dan Puncak, kami memastikan setiap helai daun dipanen secara adil dan diproses dengan standar mutu tertinggi.
               </Text>
               <Button
@@ -570,32 +522,13 @@ export default function HomePage() {
                     p="md"
                     radius="md"
                     ta="center"
-                    style={{
-                      backgroundColor: '#FFFFFF',
-                      border: '1px solid #D9C9A0',
-                      transition: 'all 0.2s ease',
-                      cursor: 'pointer',
-                    }}
-                    onMouseEnter={(e) => {
-                      e.currentTarget.style.backgroundColor = '#4A6B3A';
-                      const title = e.currentTarget.querySelector('h4');
-                      const desc = e.currentTarget.querySelector('p');
-                      if (title) title.style.color = '#FFFFFF';
-                      if (desc) desc.style.color = '#E2ECD9';
-                    }}
-                    onMouseLeave={(e) => {
-                      e.currentTarget.style.backgroundColor = '#FFFFFF';
-                      const title = e.currentTarget.querySelector('h4');
-                      const desc = e.currentTarget.querySelector('p');
-                      if (title) title.style.color = '#1C2A16';
-                      if (desc) desc.style.color = '#6B7365';
-                    }}
+                    className={styles.categoryCard}
                   >
                     <IconLeaf size={24} color="#6B4423" style={{ margin: '0 auto 8px' }} />
-                    <Title order={4} fz="sm" c="#1C2A16">
+                    <Title order={3} fz="sm" c="#1C2A16" className={styles.categoryTitle}>
                       {cat.name}
                     </Title>
-                    <Text fz="xs" c="#6B7365" mt={4}>
+                    <Text fz="xs" c="#4E5549" mt={4} className={styles.categoryDesc}>
                       {cat.desc}
                     </Text>
                   </Card>
@@ -694,7 +627,7 @@ export default function HomePage() {
               >
                 Artikel & Edukasi Terbaru
               </Title>
-              <Text c="#6B7365" mt={4}>
+              <Text c="#4E5549" mt={4}>
                 Tips seduh, manfaat kesehatan, dan wawasan seputar dunia teh nusantara.
               </Text>
             </FadeIn>
@@ -732,6 +665,7 @@ export default function HomePage() {
                       src={art.image}
                       alt={art.title}
                       fill
+                      sizes="(max-width: 768px) 100vw, 33vw"
                       style={{ objectFit: 'cover' }}
                     />
                     <Badge
@@ -751,18 +685,17 @@ export default function HomePage() {
                   <Stack p="lg" gap="xs" style={{ flex: 1, justifyContent: 'space-between' }}>
                     <Box>
                       <Group gap="xs" mb={4}>
-                        <IconCalendar size={14} color="#6B7365" />
-                        <Text fz="xs" c="#6B7365">
+                        <IconCalendar size={14} color="#4E5549" />
+                        <Text fz="xs" c="#4E5549">
                           {art.date} • {art.readTime}
                         </Text>
                       </Group>
                       <Link
                         href={`/blog/${art.slug}`}
-                        style={{ textDecoration: 'none' }}
+                        className={styles.cardTitleLink}
                       >
                         <Title
-                          order={4}
-                          c="#1C2A16"
+                          order={3}
                           style={{
                             fontFamily: 'var(--font-playfair)',
                             fontSize: rem(18),
@@ -772,7 +705,7 @@ export default function HomePage() {
                           {art.title}
                         </Title>
                       </Link>
-                      <Text fz="xs" c="#6B7365" mt={8} lineClamp={2}>
+                      <Text fz="xs" c="#4E5549" mt={8} lineClamp={2}>
                         {art.excerpt}
                       </Text>
                     </Box>
@@ -832,37 +765,7 @@ export default function HomePage() {
                 Dapatkan tips menyeduh, cerita petani, dan info produk baru langsung di email kamu.
               </Text>
 
-              <form onSubmit={handleSubscribe}>
-                <Group
-                  justify="center"
-                  gap="xs"
-                  style={{ maxWidth: rem(480), margin: '0 auto' }}
-                >
-                  <TextInput
-                    placeholder="Masukkan alamat email kamu"
-                    value={newsletterEmail}
-                    onChange={(e) => setNewsletterEmail(e.currentTarget.value)}
-                    radius="xl"
-                    size="md"
-                    leftSection={<IconMail size={18} color="#6B7365" />}
-                    style={{ flex: 1 }}
-                    aria-label="Email untuk berlangganan newsletter"
-                  />
-                  <Button
-                    type="submit"
-                    loading={isSubscribing}
-                    radius="xl"
-                    size="md"
-                    color="teaBrown"
-                    style={{
-                      backgroundColor: '#6B4423',
-                      fontWeight: 600,
-                    }}
-                  >
-                    Berlangganan
-                  </Button>
-                </Group>
-              </form>
+              <NewsletterForm />
             </Card>
           </FadeIn>
         </Container>
@@ -870,4 +773,3 @@ export default function HomePage() {
     </Box>
   );
 }
-

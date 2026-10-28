@@ -44,7 +44,7 @@ export default function ProcessPage() {
             >
               Dari Kebun ke Cangkir
             </Title>
-            <Text fz={{ base: 'md', sm: 'lg' }} c="#6B7365" style={{ lineHeight: 1.8 }}>
+            <Text fz={{ base: 'md', sm: 'lg' }} c="#4E5549" style={{ lineHeight: 1.8 }}>
               Setiap cangkir punya perjalanan panjang. Mengolah daun teh dengan perpaduan kearifan petani lokal dan standar higienis modern.
             </Text>
           </Box>
@@ -67,9 +67,9 @@ export default function ProcessPage() {
                   fontSize: rem(32),
                 }}
               >
-                6 Langkah Menjaga Kemurnian Rasa
+                5 Langkah Menjaga Kemurnian Rasa
               </Title>
-              <Text c="#6B7365" mt={4}>
+              <Text c="#4E5549" mt={4}>
                 Proses teliti dari fajar pertama hingga daun teh siap diseduh.
               </Text>
             </Box>
@@ -124,7 +124,7 @@ export default function ProcessPage() {
                     >
                       {step.title}
                     </Title>
-                    <Text fz="sm" c="#6B7365" style={{ lineHeight: 1.7 }}>
+                    <Text fz="sm" c="#4E5549" style={{ lineHeight: 1.7 }}>
                       {step.description}
                     </Text>
                   </Stack>
@@ -153,7 +153,7 @@ export default function ProcessPage() {
               >
                 Galeri Kebun Nusantara
               </Title>
-              <Text c="#6B7365" mt={4}>
+              <Text c="#4E5549" mt={4}>
                 Panorama alam dataran tinggi Jawa Barat dan kehangatan dedikasi petani kami.
               </Text>
             </Box>
@@ -184,7 +184,7 @@ export default function ProcessPage() {
                     <Title order={4} fz="md" c="#1C2A16" style={{ fontFamily: 'var(--font-playfair)' }}>
                       {item.title}
                     </Title>
-                    <Text fz="xs" c="#6B7365" mt={4}>
+                    <Text fz="xs" c="#4E5549" mt={4}>
                       {item.description}
                     </Text>
                   </Box>
@@ -324,4 +324,5 @@ export default function ProcessPage() {
     </Box>
   );
 }
+
 

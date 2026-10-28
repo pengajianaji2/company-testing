@@ -5,6 +5,8 @@
 
 # testing
 /coverage
+tests/
+vitest.config.ts
 
 # next.js
 /.next/
@@ -34,5 +36,3 @@ next-env.d.ts
 docs/
 orchestrator/
 templates/
-templates/
-orchestrator/
