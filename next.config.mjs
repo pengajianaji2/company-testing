@@ -1,6 +1,9 @@
 /** @type {import('next').NextConfig} */
 const nextConfig = {
   reactStrictMode: true,
+  experimental: {
+    optimizePackageImports: ['@tabler/icons-react', '@mantine/core', '@mantine/hooks'],
+  },
   images: {
     formats: ['image/avif', 'image/webp'],
     remotePatterns: [
