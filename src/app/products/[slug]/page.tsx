@@ -14,26 +14,25 @@ import {
   Button,
   Group,
   Stack,
-  Card,
   Breadcrumbs,
   Anchor,
-  SimpleGrid,
   rem,
-  ThemeIcon,
 } from '@mantine/core';
 import {
   IconBrandWhatsapp,
   IconMapPin,
   IconMountain,
-  IconDroplet,
-  IconClock,
-  IconThermometer,
-  IconCoffee,
   IconArrowLeft,
   IconSparkles,
 } from '@tabler/icons-react';
-import { useProductBySlug, useRelatedProducts } from '@/features/products/hooks/use-products';
-import { ProductCard } from '@/features/products/components/product-card';
+import {
+  useProductBySlug,
+  useRelatedProducts,
+} from '@/features/products/hooks/use-products';
+import {
+  BrewGuideCard,
+  RelatedProducts,
+} from '@/features/products/components';
 import { FadeIn } from '@/components/motion/fade-in';
 
 export default function ProductDetailPage() {
@@ -41,7 +40,9 @@ export default function ProductDetailPage() {
   const slug = typeof params?.slug === 'string' ? params.slug : '';
 
   const { data: product, isLoading } = useProductBySlug(slug);
-  const { data: relatedProducts } = useRelatedProducts(product?.relatedSlugs || []);
+  const { data: relatedProducts } = useRelatedProducts(
+    product?.relatedSlugs || []
+  );
 
   if (isLoading) {
     return (
@@ -64,7 +65,12 @@ export default function ProductDetailPage() {
             border: '1px solid #E2D9C8',
           }}
         >
-          <Title order={2} c="#1C2A16" style={{ fontFamily: 'var(--font-playfair)' }} mb="sm">
+          <Title
+            order={2}
+            c="#1C2A16"
+            style={{ fontFamily: 'var(--font-playfair)' }}
+            mb="sm"
+          >
             Produk Tidak Ditemukan
           </Title>
           <Text fz="sm" c="#6B7365" mb="lg">
@@ -136,6 +142,7 @@ export default function ProductDetailPage() {
                   alt={product.name}
                   fill
                   priority
+                  sizes="(max-width: 768px) 100vw, 50vw"
                   style={{ objectFit: 'cover' }}
                 />
               </Box>
@@ -212,7 +219,11 @@ export default function ProductDetailPage() {
                         size="md"
                         color="cream"
                         variant="filled"
-                        style={{ color: '#4A6B3A', backgroundColor: '#FDFCF9', border: '1px solid #D9C9A0' }}
+                        style={{
+                          color: '#4A6B3A',
+                          backgroundColor: '#FDFCF9',
+                          border: '1px solid #D9C9A0',
+                        }}
                         leftSection={<IconSparkles size={12} />}
                       >
                         {note}
@@ -221,49 +232,8 @@ export default function ProductDetailPage() {
                   </Group>
                 </Box>
 
-                {/* Cara Menyeduh Card */}
-                <Card
-                  p="md"
-                  radius="md"
-                  mt="sm"
-                  style={{
-                    backgroundColor: '#FDFBF7',
-                    border: '1px solid #E2D9C8',
-                  }}
-                >
-                  <Text fw={600} fz="sm" c="#1C2A16" mb="xs" style={{ fontFamily: 'var(--font-playfair)' }}>
-                    Panduan Menyeduh Ideal
-                  </Text>
-                  <SimpleGrid cols={2} spacing="xs" mb="xs">
-                    <Group gap={6}>
-                      <IconThermometer size={16} color="#6B4423" />
-                      <Text fz="xs" c="#2C3328">
-                        Suhu: {product.brewGuide.temp}
-                      </Text>
-                    </Group>
-                    <Group gap={6}>
-                      <IconCoffee size={16} color="#6B4423" />
-                      <Text fz="xs" c="#2C3328">
-                        Takaran: {product.brewGuide.amount}
-                      </Text>
-                    </Group>
-                    <Group gap={6}>
-                      <IconDroplet size={16} color="#6B4423" />
-                      <Text fz="xs" c="#2C3328">
-                        Air: {product.brewGuide.water}
-                      </Text>
-                    </Group>
-                    <Group gap={6}>
-                      <IconClock size={16} color="#6B4423" />
-                      <Text fz="xs" c="#2C3328">
-                        Waktu: {product.brewGuide.time}
-                      </Text>
-                    </Group>
-                  </SimpleGrid>
-                  <Text fz="xs" c="#6B7365" style={{ fontStyle: 'italic' }}>
-                    Tip: {product.brewGuide.note}
-                  </Text>
-                </Card>
+                {/* Cara Menyeduh Card (Modular Component) */}
+                <BrewGuideCard brewGuide={product.brewGuide} />
 
                 {/* WhatsApp Order Button */}
                 <Button
@@ -288,31 +258,11 @@ export default function ProductDetailPage() {
           </Grid.Col>
         </Grid>
 
-        {/* Bottom Section: Related Products */}
+        {/* Bottom Section: Related Products (Modular Component) */}
         {relatedProducts && relatedProducts.length > 0 && (
-          <Box component="section" mt={rem(64)} pt={rem(48)} style={{ borderTop: '1px solid #E2D9C8' }}>
-            <FadeIn>
-              <Title
-                order={2}
-                style={{
-                  fontFamily: 'var(--font-playfair)',
-                  color: '#1C2A16',
-                  fontSize: rem(28),
-                  marginBottom: rem(24),
-                }}
-              >
-                Varian Teh Terkait
-              </Title>
-              <SimpleGrid cols={{ base: 1, sm: 2, md: 3 }} spacing={rem(24)}>
-                {relatedProducts.map((rel) => (
-                  <ProductCard key={rel.id} product={rel} />
-                ))}
-              </SimpleGrid>
-            </FadeIn>
-          </Box>
+          <RelatedProducts products={relatedProducts} />
         )}
       </Container>
     </Box>
   );
 }
-
